@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { Suspense } from 'react';
 
 import { NewVerificationForm } from '@/features/auth/components';
 
@@ -7,5 +8,9 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-	return <NewVerificationForm />;
+	return (
+		<Suspense>
+			<NewVerificationForm />
+		</Suspense>
+	);
 }
