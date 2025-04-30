@@ -1,8 +1,7 @@
-import { AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
+import Image from 'next/image';
 import Link from 'next/link';
 
 import {
-	Avatar,
 	Card,
 	CardContent,
 	CardDescription,
@@ -23,10 +22,14 @@ export function PostCard({ post }: Props) {
 			<CardHeader className='px-4'>
 				<div className='flex items-center gap-x-2'>
 					<div className='flex items-center gap-x-2'>
-						<Avatar className='size-10'>
-							<AvatarImage src='/kanat.jpg' />
-							<AvatarFallback>СК</AvatarFallback>
-						</Avatar>
+						<Image
+							src='/kanat.jpg'
+							width={40}
+							height={40}
+							className='size-10 rounded-full object-cover'
+							alt='avatar'
+							priority
+						/>
 					</div>
 
 					<div>
