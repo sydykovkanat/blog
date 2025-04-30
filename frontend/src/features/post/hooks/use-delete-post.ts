@@ -6,7 +6,11 @@ import { postService } from '../services';
 export function useDeletePost() {
 	const queryClient = useQueryClient();
 
-	const { mutate: deletePost, isPending: isDeletePostLoading } = useMutation({
+	const {
+		mutate: deletePost,
+		isPending: isDeletePostLoading,
+		isSuccess: isDeletePostSuccess,
+	} = useMutation({
 		mutationKey: ['delete-post'],
 		mutationFn: (postId: string) => postService.delete(postId),
 		onSuccess: async () => {
@@ -26,5 +30,6 @@ export function useDeletePost() {
 	return {
 		deletePost,
 		isDeletePostLoading,
+		isDeletePostSuccess,
 	};
 }

@@ -1,4 +1,5 @@
 import { AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
+import Link from 'next/link';
 
 import {
 	Avatar,
@@ -36,7 +37,17 @@ export function PostCard({ post }: Props) {
 			</CardHeader>
 
 			<CardContent className='px-4'>
-				<p className='text-primary whitespace-pre-wrap'>{post.content}</p>
+				<h3 className='mb-1 font-medium'>{post.title}</h3>
+
+				<p className='text-primary line-clamp-2 whitespace-pre-wrap'>
+					{post.content}
+				</p>
+
+				<Link href={`/post/${post.id}`}>
+					<button className='text-primary text-sm underline'>
+						Читать полностью
+					</button>
+				</Link>
 			</CardContent>
 		</Card>
 	);

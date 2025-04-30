@@ -8,6 +8,10 @@ class PostService {
 		return await api.get<IPost[]>('/posts');
 	}
 
+	async getById(id: string) {
+		return await api.get<IPost>(`/posts/${id}`);
+	}
+
 	async create(data: PostSchemaType) {
 		return await api.post<IPost>('/posts', data);
 	}
