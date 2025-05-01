@@ -13,7 +13,17 @@ class PostService {
 	}
 
 	async create(data: PostSchemaType) {
-		return await api.post<IPost>('/posts', data);
+		return await api.post<IPost>(
+			'/posts',
+			{
+				title: data.title,
+				content: data.content,
+			},
+			{
+				key: 'images',
+				value: data.images,
+			},
+		);
 	}
 
 	async delete(id: string) {

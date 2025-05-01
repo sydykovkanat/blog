@@ -86,15 +86,29 @@ export class FetchClient {
 	public post<T>(
 		endpoint: string,
 		body?: Record<string, any>,
+		files?: {
+			key: string;
+			value: File[];
+		},
 		options: RequestOptions = {},
 	) {
+		const formData = new FormData();
+
+		if (body) {
+			Object.keys(body).forEach((key) => {
+				formData.append(key, body[key]);
+			});
+		}
+
+		if (files && files.key && files.value.length > 0) {
+			files.value.forEach((file) => {
+				formData.append(files.key, file);
+			});
+		}
+
 		return this.request<T>(endpoint, 'POST', {
 			...options,
-			headers: {
-				'Content-Type': 'application/json',
-				...(options?.headers || {}),
-			},
-			...(!!body && { body: JSON.stringify(body) }),
+			body: formData,
 		});
 	}
 

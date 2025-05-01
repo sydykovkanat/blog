@@ -7,7 +7,11 @@ import { postService } from '../services';
 export function useCreatePost() {
 	const queryClient = useQueryClient();
 
-	const { mutate: createPost, isPending: isCreatePostLoading } = useMutation({
+	const {
+		mutate: createPost,
+		isPending: isCreatePostLoading,
+		isSuccess: isCreatePostSuccess,
+	} = useMutation({
 		mutationKey: ['create-post'],
 		mutationFn: (data: PostSchemaType) => postService.create(data),
 		onSuccess: async () => {
@@ -27,5 +31,6 @@ export function useCreatePost() {
 	return {
 		createPost,
 		isCreatePostLoading,
+		isCreatePostSuccess,
 	};
 }
