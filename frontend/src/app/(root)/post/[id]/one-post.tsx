@@ -101,7 +101,7 @@ export function OnePost({ id }: Props) {
 							<img
 								key={image}
 								src={image}
-								className='h-auto w-auto rounded-md'
+								className='aspect-square rounded-md object-cover'
 								alt={`${post.title} post image`}
 							/>
 						))}
