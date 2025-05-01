@@ -5,6 +5,7 @@ export interface IPost {
 
 	title: string;
 	content: string;
+	images: string[];
 
 	author: IUser;
 	authorId: string;

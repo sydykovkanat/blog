@@ -9,7 +9,13 @@ import { UserRole } from '@/features/auth/types';
 import { useDeletePost, useGetPost } from '@/features/post/hooks';
 
 import { Container } from '@/shared/components/shared';
-import { Button, ErrorBlock, Loading } from '@/shared/components/ui';
+import {
+	Button,
+	ErrorBlock,
+	Loading,
+	ScrollArea,
+	ScrollBar,
+} from '@/shared/components/ui';
 import { useProfile } from '@/shared/hooks';
 import { timeAgo } from '@/shared/utils';
 
@@ -84,6 +90,26 @@ export function OnePost({ id }: Props) {
 			<h1 className='mb-1 font-medium'>{post.title}</h1>
 
 			<p className='whitespace-pre-wrap'>{post.content}</p>
+
+			{post.images.length > 0 && (
+				<ScrollArea className='w-full pb-2'>
+					<div className='mt-2 mb-2 flex gap-x-2'>
+						{post.images.map((image) => (
+							<Image
+								key={image}
+								src={image}
+								width={160}
+								height={200}
+								className='h-[200px] w-[160px] rounded-md object-cover'
+								alt={`${post.title} post image`}
+								priority
+							/>
+						))}
+					</div>
+
+					<ScrollBar orientation='horizontal' />
+				</ScrollArea>
+			)}
 		</Container>
 	);
 }

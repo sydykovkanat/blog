@@ -32,12 +32,22 @@ export class PostService {
     return post;
   }
 
-  async create(authorId: string, dto: CreatePostDto) {
+  async create(
+    authorId: string,
+    dto: CreatePostDto,
+    images: Express.Multer.File[],
+  ) {
+    const imageUrls = images.map((image) => {
+      const filename = image.filename;
+      return `/uploads/posts/${filename}`;
+    });
+
     return this.prismaService.post.create({
       data: {
         title: dto.title,
         content: dto.content,
         authorId,
+        images: imageUrls,
       },
     });
   }

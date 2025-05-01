@@ -7,6 +7,8 @@ import {
 	CardDescription,
 	CardHeader,
 	CardTitle,
+	ScrollArea,
+	ScrollBar,
 } from '@/shared/components/ui';
 import { timeAgo } from '@/shared/utils';
 
@@ -23,7 +25,7 @@ export function PostCard({ post }: Props) {
 				<div className='flex items-center gap-x-2'>
 					<div className='flex items-center gap-x-2'>
 						<Image
-							src='/kanat.jpg'
+							src={post.author.picture || '/kanat.jpg'}
 							width={40}
 							height={40}
 							className='size-10 rounded-full object-cover'
@@ -33,7 +35,7 @@ export function PostCard({ post }: Props) {
 					</div>
 
 					<div>
-						<CardTitle>Сыдыков Канат</CardTitle>
+						<CardTitle>{post.author.displayName}</CardTitle>
 						<CardDescription>{timeAgo(post.createdAt)}</CardDescription>
 					</div>
 				</div>
@@ -45,6 +47,26 @@ export function PostCard({ post }: Props) {
 				<p className='text-primary line-clamp-2 whitespace-pre-wrap'>
 					{post.content}
 				</p>
+
+				{post.images.length > 0 && (
+					<ScrollArea className='w-full pb-2'>
+						<div className='mt-2 mb-2 flex gap-x-2'>
+							{post.images.map((image) => (
+								<Image
+									key={image}
+									src={image}
+									width={160}
+									height={200}
+									className='h-[200px] w-[160px] rounded-md object-cover'
+									alt={`${post.title} post image`}
+									priority
+								/>
+							))}
+						</div>
+
+						<ScrollBar orientation='horizontal' />
+					</ScrollArea>
+				)}
 
 				<Link href={`/post/${post.id}`}>
 					<button className='text-primary text-sm underline'>

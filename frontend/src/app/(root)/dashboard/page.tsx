@@ -1,11 +1,11 @@
 import { Metadata } from 'next';
 
-import { SettingsForm } from '@/features/user/components';
+import { Dashboard } from './dashboard';
 
 export const metadata: Metadata = {
 	title: 'Панель управления',
 };
 
 export default function Page() {
-	return <SettingsForm />;
+	return <Dashboard />;
 }

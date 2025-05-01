@@ -3259,6 +3259,7 @@ export namespace Prisma {
     id: number
     title: number
     content: number
+    images: number
     authorId: number
     createdAt: number
     updatedAt: number
@@ -3288,6 +3289,7 @@ export namespace Prisma {
     id?: true
     title?: true
     content?: true
+    images?: true
     authorId?: true
     createdAt?: true
     updatedAt?: true
@@ -3370,6 +3372,7 @@ export namespace Prisma {
     id: string
     title: string
     content: string
+    images: string[]
     authorId: string
     createdAt: Date
     updatedAt: Date
@@ -3396,6 +3399,7 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     content?: boolean
+    images?: boolean
     authorId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -3406,6 +3410,7 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     content?: boolean
+    images?: boolean
     authorId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -3416,6 +3421,7 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     content?: boolean
+    images?: boolean
     authorId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -3426,12 +3432,13 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     content?: boolean
+    images?: boolean
     authorId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type PostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "content" | "authorId" | "createdAt" | "updatedAt", ExtArgs["result"]["post"]>
+  export type PostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "content" | "images" | "authorId" | "createdAt" | "updatedAt", ExtArgs["result"]["post"]>
   export type PostInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     author?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -3451,6 +3458,7 @@ export namespace Prisma {
       id: string
       title: string
       content: string
+      images: string[]
       authorId: string
       createdAt: Date
       updatedAt: Date
@@ -3881,6 +3889,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Post", 'String'>
     readonly title: FieldRef<"Post", 'String'>
     readonly content: FieldRef<"Post", 'String'>
+    readonly images: FieldRef<"Post", 'String[]'>
     readonly authorId: FieldRef<"Post", 'String'>
     readonly createdAt: FieldRef<"Post", 'DateTime'>
     readonly updatedAt: FieldRef<"Post", 'DateTime'>
@@ -4342,6 +4351,7 @@ export namespace Prisma {
     id: 'id',
     title: 'title',
     content: 'content',
+    images: 'images',
     authorId: 'authorId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -4593,6 +4603,7 @@ export namespace Prisma {
     id?: StringFilter<"Post"> | string
     title?: StringFilter<"Post"> | string
     content?: StringFilter<"Post"> | string
+    images?: StringNullableListFilter<"Post">
     authorId?: StringFilter<"Post"> | string
     createdAt?: DateTimeFilter<"Post"> | Date | string
     updatedAt?: DateTimeFilter<"Post"> | Date | string
@@ -4603,6 +4614,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     content?: SortOrder
+    images?: SortOrder
     authorId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -4616,6 +4628,7 @@ export namespace Prisma {
     NOT?: PostWhereInput | PostWhereInput[]
     title?: StringFilter<"Post"> | string
     content?: StringFilter<"Post"> | string
+    images?: StringNullableListFilter<"Post">
     authorId?: StringFilter<"Post"> | string
     createdAt?: DateTimeFilter<"Post"> | Date | string
     updatedAt?: DateTimeFilter<"Post"> | Date | string
@@ -4626,6 +4639,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     content?: SortOrder
+    images?: SortOrder
     authorId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -4641,6 +4655,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Post"> | string
     title?: StringWithAggregatesFilter<"Post"> | string
     content?: StringWithAggregatesFilter<"Post"> | string
+    images?: StringNullableListFilter<"Post">
     authorId?: StringWithAggregatesFilter<"Post"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Post"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Post"> | Date | string
@@ -4794,6 +4809,7 @@ export namespace Prisma {
     id?: string
     title: string
     content: string
+    images?: PostCreateimagesInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutPostsInput
@@ -4803,6 +4819,7 @@ export namespace Prisma {
     id?: string
     title: string
     content: string
+    images?: PostCreateimagesInput | string[]
     authorId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -4812,6 +4829,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    images?: PostUpdateimagesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutPostsNestedInput
@@ -4821,6 +4839,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    images?: PostUpdateimagesInput | string[]
     authorId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -4830,6 +4849,7 @@ export namespace Prisma {
     id?: string
     title: string
     content: string
+    images?: PostCreateimagesInput | string[]
     authorId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -4839,6 +4859,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    images?: PostUpdateimagesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -4847,6 +4868,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    images?: PostUpdateimagesInput | string[]
     authorId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -5065,6 +5087,14 @@ export namespace Prisma {
     _max?: NestedEnumTokenTypeFilter<$PrismaModel>
   }
 
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
   export type UserScalarRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
@@ -5074,6 +5104,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     content?: SortOrder
+    images?: SortOrder
     authorId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -5163,10 +5194,19 @@ export namespace Prisma {
     set?: $Enums.TokenType
   }
 
+  export type PostCreateimagesInput = {
+    set: string[]
+  }
+
   export type UserCreateNestedOneWithoutPostsInput = {
     create?: XOR<UserCreateWithoutPostsInput, UserUncheckedCreateWithoutPostsInput>
     connectOrCreate?: UserCreateOrConnectWithoutPostsInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type PostUpdateimagesInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type UserUpdateOneRequiredWithoutPostsNestedInput = {
@@ -5337,6 +5377,7 @@ export namespace Prisma {
     id?: string
     title: string
     content: string
+    images?: PostCreateimagesInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -5345,6 +5386,7 @@ export namespace Prisma {
     id?: string
     title: string
     content: string
+    images?: PostCreateimagesInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -5382,6 +5424,7 @@ export namespace Prisma {
     id?: StringFilter<"Post"> | string
     title?: StringFilter<"Post"> | string
     content?: StringFilter<"Post"> | string
+    images?: StringNullableListFilter<"Post">
     authorId?: StringFilter<"Post"> | string
     createdAt?: DateTimeFilter<"Post"> | Date | string
     updatedAt?: DateTimeFilter<"Post"> | Date | string
@@ -5455,6 +5498,7 @@ export namespace Prisma {
     id?: string
     title: string
     content: string
+    images?: PostCreateimagesInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -5463,6 +5507,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    images?: PostUpdateimagesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -5471,6 +5516,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    images?: PostUpdateimagesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -5479,6 +5525,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    images?: PostUpdateimagesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

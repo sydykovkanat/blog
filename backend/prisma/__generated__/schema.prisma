@@ -54,6 +54,7 @@ model Post {
 
   title   String
   content String
+  images  String[]
 
   authorId String @map("author_id")
   author   User   @relation(fields: [authorId], references: [id])

@@ -3,6 +3,8 @@
 /node_modules
 /build
 
+/prisma/__generated__
+
 # Logs
 logs
 *.log

@@ -8,6 +8,7 @@ export * from './form';
 export * from './input';
 export * from './label';
 export * from './loading';
+export * from './scroll-area';
 export * from './skeleton';
 export * from './sonner';
 export * from './textarea';
