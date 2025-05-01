@@ -94,7 +94,7 @@ export function OnePost({ id }: Props) {
 
 			<p className='whitespace-pre-wrap'>{post.content}</p>
 
-			{post.images.length > 0 && (
+			{post.images && post.images.length > 0 && (
 				<ScrollArea className='w-full pb-2'>
 					<div className='mt-2 mb-2 flex gap-x-2'>
 						{post.images.map((image) => (
