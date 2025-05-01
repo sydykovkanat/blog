@@ -177,7 +177,7 @@ const config = {
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": "../../.env",
+    "rootEnvPath": null,
     "schemaEnvPath": "../../.env"
   },
   "relativePath": "..",
@@ -191,7 +191,7 @@ const config = {
     "db": {
       "url": {
         "fromEnvVar": "POSTGRES_URI",
-        "value": "postgresql://root:123456@localhost:5432/fullstack-auth"
+        "value": "postgresql://root:123456@localhost:5432/blog"
       }
     }
   },

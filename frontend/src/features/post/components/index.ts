@@ -1,2 +1,2 @@
-export * from './create-post-modal';
+export * from './create-post-form';
 export * from './post-card';

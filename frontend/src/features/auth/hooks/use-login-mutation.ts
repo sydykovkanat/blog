@@ -20,7 +20,7 @@ export function useLoginMutation() {
 				toast.success('Успешный вход', {
 					description: 'Вы успешно вошли в систему',
 				});
-				router.push('/dashboard');
+				router.replace('/');
 			}
 		},
 		onError: (error) => {

@@ -106,9 +106,16 @@ export class FetchClient {
 			});
 		}
 
+		const contentType =
+			files && files.value.length > 0 ? undefined : 'application/json';
+
 		return this.request<T>(endpoint, 'POST', {
 			...options,
-			body: formData,
+			body: files && files.value.length > 0 ? formData : JSON.stringify(body),
+			headers: {
+				...(contentType && { 'Content-Type': contentType }),
+				...(options?.headers || {}),
+			},
 		});
 	}
 

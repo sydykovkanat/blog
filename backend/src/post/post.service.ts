@@ -1,4 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
+import { User, UserRole } from '@prisma/__generated__';
 
 import { PrismaService } from '../prisma/prisma.service';
 
@@ -35,12 +40,16 @@ export class PostService {
   async create(
     authorId: string,
     dto: CreatePostDto,
-    images: Express.Multer.File[],
+    images?: Express.Multer.File[],
   ) {
-    const imageUrls = images.map((image) => {
-      const filename = image.filename;
-      return `/uploads/posts/${filename}`;
-    });
+    const imageUrls =
+      (images &&
+        images.length > 0 &&
+        images.map((image) => {
+          const filename = image.filename;
+          return `/uploads/posts/${filename}`;
+        })) ||
+      [];
 
     return this.prismaService.post.create({
       data: {
@@ -52,8 +61,13 @@ export class PostService {
     });
   }
 
-  async delete(id: string) {
+  async delete(id: string, user: User) {
     const post = await this.getById(id);
+
+    if (user.role !== UserRole.ADMIN && user.id !== post.authorId) {
+      console.log(user.role, user.id, post.authorId);
+      throw new ForbiddenException('У вас нет прав для удаления этого поста');
+    }
 
     return this.prismaService.post.delete({
       where: {

@@ -48,6 +48,9 @@ export function OnePost({ id }: Props) {
 		deletePost(post.id);
 	};
 
+	const isAccess =
+		user && (user.role === UserRole.Admin || user.id === post.authorId);
+
 	return (
 		<Container className='min-h-screen border-x border-dashed py-2'>
 			<div className='mb-4 flex items-center gap-x-2'>
@@ -55,7 +58,7 @@ export function OnePost({ id }: Props) {
 					<ArrowLeftIcon />
 				</Button>
 
-				{user && user.role === UserRole.Admin && (
+				{isAccess && (
 					<Button
 						size={'icon'}
 						className='size-7'
@@ -95,14 +98,11 @@ export function OnePost({ id }: Props) {
 				<ScrollArea className='w-full pb-2'>
 					<div className='mt-2 mb-2 flex gap-x-2'>
 						{post.images.map((image) => (
-							<Image
+							<img
 								key={image}
 								src={image}
-								width={160}
-								height={200}
-								className='h-[200px] w-[160px] rounded-md object-cover'
+								className='h-auto w-auto rounded-md'
 								alt={`${post.title} post image`}
-								priority
 							/>
 						))}
 					</div>

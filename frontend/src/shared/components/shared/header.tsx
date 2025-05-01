@@ -3,8 +3,6 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { UserRole } from '@/features/auth/types';
-
 import { useProfile } from '@/shared/hooks';
 import { cn } from '@/shared/utils';
 
@@ -51,7 +49,6 @@ export function Header() {
 						))}
 
 						{user &&
-							user.role === UserRole.Admin &&
 							adminItems.map((item) => (
 								<li
 									key={item.name}

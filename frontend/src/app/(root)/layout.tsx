@@ -4,16 +4,21 @@ import { Footer, Header } from '@/shared/components/shared';
 
 export default function AppLayout({
 	children,
+	modal,
 }: Readonly<{
 	children: ReactNode;
+	modal: ReactNode;
 }>) {
 	return (
-		<div className='flex min-h-screen flex-col justify-between'>
-			<Header />
+		<>
+			{modal}
+			<div className='flex min-h-screen flex-col justify-between'>
+				<Header />
 
-			<main className='h-full w-full grow'>{children}</main>
+				<main className='h-full w-full grow'>{children}</main>
 
-			<Footer />
-		</div>
+				<Footer />
+			</div>
+		</>
 	);
 }

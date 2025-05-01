@@ -10,12 +10,15 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express';
-import { UserRole } from '@prisma/__generated__';
+import { User } from '@prisma/__generated__';
+import * as heicConvert from 'heic-convert';
 import { diskStorage } from 'multer';
+import * as path from 'path';
 import { extname } from 'path';
 
 import { Authorization } from '../auth/decorators/auth.decorator';
 import { CurrentUser } from '../auth/decorators/authorized.decorator';
+import * as fs from 'fs/promises';
 
 import { CreatePostDto } from './dto/create-post.dto';
 import { PostService } from './post.service';
@@ -34,7 +37,7 @@ export class PostController {
     return this.postService.getById(id);
   }
 
-  @Authorization(UserRole.ADMIN)
+  @Authorization()
   @Post()
   @UseInterceptors(
     FilesInterceptor('images', 10, {
@@ -43,16 +46,18 @@ export class PostController {
         filename: (_req, file, callback) => {
           const uniqueSuffix =
             Date.now() + '-' + Math.round(Math.random() * 1e9);
-          const ext = extname(file.originalname);
+          const ext = extname(file.originalname).toLowerCase();
           const filename = `${file.fieldname}-${uniqueSuffix}${ext}`;
           callback(null, filename);
         },
       }),
       fileFilter: (_req, file, callback) => {
-        const isImage = file.mimetype.startsWith('image/');
-        if (!isImage) {
+        const isValid = file.mimetype.startsWith('image/');
+        if (!isValid) {
           return callback(
-            new BadRequestException('Невалидный тип файла'),
+            new BadRequestException(
+              'Невалидный тип файла. Разрешены только изображения.',
+            ),
             false,
           );
         }
@@ -65,12 +70,46 @@ export class PostController {
     @CurrentUser('id') authorId: string,
     @UploadedFiles() images: Express.Multer.File[],
   ) {
-    return this.postService.create(authorId, dto, images);
+    const convertedImages: Express.Multer.File[] = [];
+    if (!images || images.length === 0) {
+      return this.postService.create(authorId, dto);
+    }
+
+    for (const image of images) {
+      const ext = path.extname(image.originalname).toLowerCase();
+
+      if (ext === '.heic' || ext === '.heif') {
+        const inputBuffer = await fs.readFile(image.path);
+
+        const outputBuffer = await heicConvert({
+          buffer: inputBuffer,
+          format: 'JPEG',
+          quality: 1,
+        });
+
+        const newFilename = image.filename.replace(/\.(heic|heif)$/i, '.jpg');
+        const newPath = path.join(path.dirname(image.path), newFilename);
+        await fs.writeFile(newPath, Buffer.from(outputBuffer));
+        await fs.unlink(image.path);
+
+        convertedImages.push({
+          ...image,
+          path: newPath,
+          filename: newFilename,
+          originalname: image.originalname.replace(/\.(heic|heif)$/i, '.jpg'),
+          mimetype: 'image/jpeg',
+        });
+      } else {
+        convertedImages.push(image);
+      }
+    }
+
+    return this.postService.create(authorId, dto, convertedImages);
   }
 
-  @Authorization(UserRole.ADMIN)
+  @Authorization()
   @Delete(':id')
-  async delete(@Param('id') id: string) {
-    return this.postService.delete(id);
+  async delete(@Param('id') id: string, @CurrentUser() user: User) {
+    return this.postService.delete(id, user);
   }
 }

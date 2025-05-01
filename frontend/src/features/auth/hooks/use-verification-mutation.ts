@@ -13,10 +13,10 @@ export function useVerificationMutation() {
 			verificationService.newVerificationCode(token),
 		onSuccess: () => {
 			toast.success('Почта успешно подтверждена');
-			router.push('/dashboard');
+			router.replace('/');
 		},
 		onError: () => {
-			router.push('/auth/login');
+			router.replace('/auth/login');
 		},
 	});
 
