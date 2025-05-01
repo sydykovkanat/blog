@@ -11,6 +11,7 @@ import {
 } from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { User } from '@prisma/__generated__';
+import { fileTypeFromBuffer } from 'file-type';
 import * as heicConvert from 'heic-convert';
 import { diskStorage } from 'multer';
 import * as path from 'path';
@@ -78,11 +79,10 @@ export class PostController {
     }
 
     for (const image of images) {
-      const ext = path.extname(image.originalname).toLowerCase();
+      const inputBuffer = await fs.readFile(image.path);
+      const fileType = await fileTypeFromBuffer(inputBuffer);
 
-      if (ext === '.heic' || ext === '.heif') {
-        const inputBuffer = await fs.readFile(image.path);
-
+      if (fileType?.mime === 'image/heic' || fileType?.mime === 'image/heif') {
         const outputBuffer = await heicConvert({
           buffer: inputBuffer,
           format: 'JPEG',
