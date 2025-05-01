@@ -1,6 +1,7 @@
 import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
+import * as bodyParser from 'body-parser';
 import { RedisStore } from 'connect-redis';
 import * as cookieParser from 'cookie-parser';
 import * as session from 'express-session';
@@ -44,6 +45,9 @@ async function bootstrap() {
       whitelist: true,
     }),
   );
+
+  app.use(bodyParser.json({ limit: '50mb' }));
+  app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
   app.enableCors({
     origin: config.getOrThrow<string>('ALLOWED_ORIGIN'),
