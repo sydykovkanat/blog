@@ -17,7 +17,10 @@ export function Footer() {
 
 				<div className='flex items-center gap-x-4'>
 					<Link href='/create'>
-						<Button size={'icon'} className='mx-auto flex justify-center'>
+						<Button
+							size={'icon'}
+							className='mx-auto flex justify-center rounded-full'
+						>
 							<PlusIcon />
 						</Button>
 					</Link>

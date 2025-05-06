@@ -125,7 +125,11 @@ export function OnePost({ id }: Props) {
 						</h4>
 
 						<CreateCommentModal postId={post.id}>
-							<Button size={'icon'} className='size-8 rounded-sm'>
+							<Button
+								variant={'outline'}
+								size={'icon'}
+								className='size-8 rounded-full'
+							>
 								<PlusIcon className='size-4' />
 							</Button>
 						</CreateCommentModal>
