@@ -29,6 +29,9 @@ export class PostService {
       where: {
         id,
       },
+      include: {
+        comments: true,
+      },
     });
     if (!post) {
       throw new NotFoundException('Пост не найден');

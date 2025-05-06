@@ -1,4 +1,5 @@
 import { IUser } from '@/features/auth/types';
+import { IComment } from '@/features/comment/types';
 
 export interface IPost {
 	id: string;
@@ -9,6 +10,8 @@ export interface IPost {
 
 	author: IUser;
 	authorId: string;
+
+	comments: IComment[];
 
 	createdAt: string;
 	updatedAt: string;

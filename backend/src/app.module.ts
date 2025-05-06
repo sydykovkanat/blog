@@ -7,6 +7,7 @@ import { join } from 'path';
 import { AuthModule } from './auth/auth.module';
 import { EmailConfirmationModule } from './auth/email-confirmation/email-confirmation.module';
 import { PasswordRecoveryModule } from './auth/password-recovery/password-recovery.module';
+import { CommentModule } from './comment/comment.module';
 import { IS_DEV_ENV } from './libs/common/utils/is-dev.util';
 import { MailModule } from './libs/mail/mail.module';
 import { PostModule } from './post/post.module';
@@ -33,6 +34,7 @@ import { UserModule } from './user/user.module';
     EmailConfirmationModule,
     PasswordRecoveryModule,
     PostModule,
+    CommentModule,
   ],
 })
 export class AppModule {}
